@@ -1,0 +1,387 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class Character {
+    protected String name;
+    protected int mood;
+
+    public Character(String name) {
+        this.name = name;
+        this.mood = 50;
+    }
+
+    public void updateMood(int change) {
+        mood += change;
+        if (mood < 0) mood = 0;
+        if (mood > 100) mood = 100;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMood() {
+        return mood;
+    }
+
+    public String greet() {
+        return "Hello, I'm " + name;
+    }
+}
+
+class Player extends Character {
+    private int complimentsGiven;
+    private int jokesTold;
+    private int giftsGiven;
+    private int storiesShared;
+    private int hobbiesDiscussed;
+    private int songsSung;
+    private int dances;
+    private int gamesPlayed;
+    private int speechesGiven;
+    private int adviceAsked;
+    private int secretsShared;
+    private int funnyStoriesTold;
+
+    public Player(String name) {
+        super(name);
+        complimentsGiven = 0;
+        jokesTold = 0;
+        giftsGiven = 0;
+        storiesShared = 0;
+        hobbiesDiscussed = 0;
+        songsSung = 0;
+        dances = 0;
+        gamesPlayed = 0;
+        speechesGiven = 0;
+        adviceAsked = 0;
+        secretsShared = 0;
+        funnyStoriesTold = 0;
+    }
+
+    public int chooseAction() {
+        Scanner scanner = new Scanner(System.in);
+        int action;
+        System.out.println("Choose an action:");
+        System.out.println("1. Compliment " + getName());
+        System.out.println("2. Joke with " + getName());
+        System.out.println("3. Buy a gift for " + getName());
+        System.out.println("4. Share a story with " + getName());
+        System.out.println("5. Apologize to " + getName());
+        System.out.println("6. Discuss a hobby with " + getName());
+        System.out.println("7. Sing a song");
+        System.out.println("8. Dance");
+        System.out.println("9. Play a game");
+        System.out.println("10. Give a motivational speech");
+        System.out.println("11. Ask for advice");
+        System.out.println("12. Share a secret");
+        System.out.println("13. Tell a funny story");
+        System.out.println("14. Check your stats");
+        System.out.println("15. Exit the game");
+        action = scanner.nextInt();
+        return action;
+    }
+
+    @Override
+    public String greet() {
+        return "Hi, I'm " + getName();
+    }
+
+    public int getComplimentsGiven() {
+        return complimentsGiven;
+    }
+
+    public int getJokesTold() {
+        return jokesTold;
+    }
+
+    public int getGiftsGiven() {
+        return giftsGiven;
+    }
+
+    public int getStoriesShared() {
+        return storiesShared;
+    }
+
+    public int getHobbiesDiscussed() {
+        return hobbiesDiscussed;
+    }
+
+    public int getSongsSung() {
+        return songsSung;
+    }
+
+    public int getDances() {
+        return dances;
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    public int getSpeechesGiven() {
+        return speechesGiven;
+    }
+
+    public int getAdviceAsked() {
+        return adviceAsked;
+    }
+
+    public int getSecretsShared() {
+        return secretsShared;
+    }
+
+    public int getFunnyStoriesTold() {
+        return funnyStoriesTold;
+    }
+
+    public void incrementComplimentsGiven() {
+        complimentsGiven++;
+    }
+
+    public void incrementJokesTold() {
+        jokesTold++;
+    }
+
+    public void incrementGiftsGiven() {
+        giftsGiven++;
+    }
+
+    public void shareStory() {
+        storiesShared++;
+    }
+
+    public void discussHobby() {
+        hobbiesDiscussed++;
+    }
+
+    public void singASong() {
+        songsSung++;
+    }
+
+    public void dance() {
+        dances++;
+    }
+
+    public void playAGame() {
+        gamesPlayed++;
+    }
+
+    public void giveAMotivationalSpeech() {
+        speechesGiven++;
+    }
+
+    public void askForAdvice() {
+        adviceAsked++;
+    }
+
+    public void shareASecret() {
+        secretsShared++;
+    }
+
+    public void tellAFunnyStory() {
+        funnyStoriesTold++;
+    }
+}
+
+class ObnoxiousPerson extends Character {
+    private int insults;
+    private int praise;
+    private int storiesShared;
+    private int hobbiesDiscussed;
+
+    public ObnoxiousPerson(String name) {
+        super(name);
+        insults = 0;
+        praise = 0;
+        storiesShared = 0;
+        hobbiesDiscussed = 0;
+    }
+
+    public void reactToAction(Player player, int action) {
+        int moodChange = 0;
+        String reaction = "I'm not impressed.";
+
+        switch (action) {
+            case 1: // Compliment
+                moodChange = new Random().nextInt(10) + 5;
+                player.incrementComplimentsGiven();
+                praise++;
+                reaction = "Well, I appreciate that!";
+                break;
+            case 2: // Joke
+                moodChange = -1 * (new Random().nextInt(10) + 5);
+                player.incrementJokesTold();
+                insults++;
+                reaction = "Your sense of humor needs work.";
+                break;
+            case 3: // Gift
+                moodChange = new Random().nextInt(15) + 10;
+                player.incrementGiftsGiven();
+                praise++;
+                reaction = "A gift? That's kind of you!";
+                break;
+            case 4: // Share a story
+                moodChange = new Random().nextInt(10) + 5;
+                player.shareStory();
+                storiesShared++;
+                praise++;
+                reaction = "I'll share one with you too.";
+                break;
+            case 5: // Apologize
+                moodChange = -1 * (new Random().nextInt(15) + 10);
+                insults++;
+                reaction = "Apologies accepted, I guess.";
+                break;
+            case 6: // Discuss a hobby
+                moodChange = new Random().nextInt(10);
+                player.discussHobby();
+                hobbiesDiscussed++;
+                reaction = "I'm actually interested in that hobby.";
+                break;
+            case 7: // Sing a song
+                moodChange = new Random().nextInt(15) + 5;
+                praise++;
+                reaction = "You've got a nice voice!";
+                break;
+            case 8: // Dance
+                moodChange = new Random().nextInt(20) + 10;
+                praise++;
+                reaction = "I didn't know you could dance!";
+                break;
+            case 9: // Play a game
+                moodChange = new Random().nextInt(15) + 10;
+                praise++;
+                reaction = "I'm up for a game!";
+                break;
+            case 10: // Give a motivational speech
+                moodChange = new Random().nextInt(15) + 10;
+                praise++;
+                reaction = "That speech was truly inspiring!";
+                break;
+            case 11: // Ask for advice
+                moodChange = new Random().nextInt(10) + 5;
+                player.askForAdvice();
+                reaction = "I guess I can give you some advice.";
+                break;
+            case 12: // Share a secret
+                moodChange = new Random().nextInt(10) + 5;
+                player.shareSecret();
+                reaction = "Your secret's safe with me!";
+                break;
+            case 13: // Tell a funny story
+                moodChange = new Random().nextInt(10) + 5;
+                player.tellFunnyStory();
+                reaction = "That's actually funny!";
+                break;
+        }
+
+        updateMood(moodChange);
+        System.out.println(reaction);
+    }
+
+    public int getInsults() {
+        return insults;
+    }
+
+    public int getPraise() {
+        return praise;
+    }
+
+    public int getStoriesShared() {
+        return storiesShared;
+    }
+
+    public int getHobbiesDiscussed() {
+        return hobbiesDiscussed;
+    }
+}
+
+enum GameOutcome {
+    WIN,
+    LOSE_INSULTS,
+    LOSE_MOOD,
+    EXIT
+}
+
+public class FriendshipGame {
+    public static GameOutcome checkGameOutcome(Player player, ObnoxiousPerson bob) {
+        if (bob.getMood() <= 0) {
+            return GameOutcome.WIN;
+        } else if (player.getJokesTold() >= 3 && bob.getInsults() >= 3) {
+            return GameOutcome.LOSE_INSULTS;
+        } else if (player.getMood() <= 0) {
+            return GameOutcome.LOSE_MOOD;
+        }
+        return GameOutcome.EXIT;
+    }
+
+    public static void displayEndingScreen(GameOutcome outcome, Player player, ObnoxiousPerson bob) {
+        try {
+            Thread.sleep(1000); // Pause before displaying the ending screen
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\n=== Game Outcome ===\n");
+
+        switch (outcome) {
+            case WIN:
+                System.out.println("Congratulations, " + player.getName() + "! You successfully befriended " + bob.getName() + "!");
+                System.out.println("You both shared " + bob.getStoriesShared() + " stories and discussed " + bob.getHobbiesDiscussed() + " hobbies.");
+                System.out.println("Bob insulted you " + bob.getInsults() + " times and praised you " + bob.getPraise() + " times.");
+                break;
+            case LOSE_INSULTS:
+                System.out.println("You told too many bad jokes, and Bob couldn't take it anymore.");
+                break;
+            case LOSE_MOOD:
+                System.out.println("Your mood dropped to a point where you couldn't continue the interaction.");
+                break;
+            case EXIT:
+                System.out.println("You chose to exit the game.");
+                break;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random rand = new Random();
+
+        System.out.println("Welcome to the Make Friends with an Obnoxious Person Game!");
+        System.out.print("Enter your name: ");
+        String playerName = scanner.next();
+
+        Player player = new Player(playerName);
+        ObnoxiousPerson bob = new ObnoxiousPerson("Bob");
+
+        System.out.println(player.greet());
+        System.out.println(bob.greet());
+
+        while (true) {
+            System.out.println(player.getName() + "'s Mood: " + player.getMood());
+            System.out.println(bob.getName() + "'s Mood: " + bob.getMood());
+
+            int action = player.chooseAction();
+
+            if (action == 14) {
+                GameOutcome outcome = checkGameOutcome(player, bob);
+                displayEndingScreen(outcome, player, bob);
+                break;
+            }
+
+            bob.reactToAction(player, action);
+
+            GameOutcome outcome = checkGameOutcome(player, bob);
+            if (outcome != GameOutcome.EXIT) {
+                displayEndingScreen(outcome, player, bob);
+                break;
+            }
+
+            try {
+                Thread.sleep(1000); // Simulate time passing
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
